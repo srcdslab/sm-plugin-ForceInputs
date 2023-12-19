@@ -1,7 +1,7 @@
 //====================================================================================================
 //
 // Name: ForceInput
-// Author: zaCade + BotoX
+// Author: zaCade + BotoX (Modified by PSE Shufen and Koen to fix crash issues)
 // Description: Allows admins to force inputs on entities. (ent_fire)
 //
 //====================================================================================================
@@ -17,9 +17,9 @@
 public Plugin myinfo =
 {
 	name 			= "ForceInput",
-	author 			= "zaCade + BotoX",
+	author 			= "zaCade + BotoX + PSE Shufen + koen",
 	description 	= "Allows admins to force inputs on entities. (ent_fire)",
-	version 		= "2.1.1",
+	version 		= "2.1.2",
 	url 			= ""
 };
 
@@ -169,7 +169,6 @@ public Action Command_ForceInput(int client, int args)
 	else
 	{
 		int Wildcard = FindCharInString(sArguments[0], '*');
-
 		int entity = INVALID_ENT_REFERENCE;
 		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
 		{
@@ -178,19 +177,28 @@ public Action Command_ForceInput(int client, int args)
 			GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
 			GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
-			if(strncmp(sClassname, sArguments[0], Wildcard, false) == 0
-				|| strncmp(sTargetname, sArguments[0], Wildcard, false) == 0)
+			if (Wildcard > 0)
 			{
-				if(sArguments[2][0])
-					SetVariantString(sArguments[2]);
-
-				AcceptEntityInput(entity, sArguments[1], client, client);
-				ReplyToCommand(client, "[SM] Input successful.");
-				LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
+				if (strncmp(sClassname, sArguments[0], Wildcard, false) == 0 || strncmp(sTargetname, sArguments[0], Wildcard, false) == 0)
+				{
+					if (sArguments[2][0]) SetVariantString(sArguments[2]);
+					AcceptEntityInput(entity, sArguments[1], client, client);
+					ReplyToCommand(client, "[SM] Input succesfull.");
+					LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
+				}
+			}
+			else
+			{
+				if (strncmp(sClassname, sArguments[0], sizeof(sClassname), false) == 0 || strncmp(sTargetname, sArguments[0], sizeof(sTargetname), false) == 0)
+				{
+					if (sArguments[2][0]) SetVariantString(sArguments[2]);
+					AcceptEntityInput(entity, sArguments[1], client, client);
+					ReplyToCommand(client, "[SM] Input succesfull.");
+					LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
+				}
 			}
 		}
 	}
-
 	return Plugin_Handled;
 }
 
