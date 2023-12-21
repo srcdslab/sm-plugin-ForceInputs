@@ -177,25 +177,15 @@ public Action Command_ForceInput(int client, int args)
 			GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
 			GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
-			if (Wildcard > 0)
+			if ((Wildcard > 0 && (strncmp(sClassname, sArguments[0], Wildcard, false) == 0 || strncmp(sTargetname, sArguments[0], Wildcard, false) == 0)) ||
+				(Wildcard <= 0 && (strncmp(sClassname, sArguments[0], sizeof(sClassname), false) == 0 || strncmp(sTargetname, sArguments[0], sizeof(sTargetname), false) == 0)))
 			{
-				if (strncmp(sClassname, sArguments[0], Wildcard, false) == 0 || strncmp(sTargetname, sArguments[0], Wildcard, false) == 0)
-				{
-					if (sArguments[2][0]) SetVariantString(sArguments[2]);
-					AcceptEntityInput(entity, sArguments[1], client, client);
-					ReplyToCommand(client, "[SM] Input succesfull.");
-					LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
-				}
-			}
-			else
-			{
-				if (strncmp(sClassname, sArguments[0], sizeof(sClassname), false) == 0 || strncmp(sTargetname, sArguments[0], sizeof(sTargetname), false) == 0)
-				{
-					if (sArguments[2][0]) SetVariantString(sArguments[2]);
-					AcceptEntityInput(entity, sArguments[1], client, client);
-					ReplyToCommand(client, "[SM] Input succesfull.");
-					LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
-				}
+				if (sArguments[2][0])
+					SetVariantString(sArguments[2]);
+
+				AcceptEntityInput(entity, sArguments[1], client, client);
+				ReplyToCommand(client, "[SM] Input succesfull.");
+				LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 			}
 		}
 	}
