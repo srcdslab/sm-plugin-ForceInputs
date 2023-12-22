@@ -184,7 +184,7 @@ public Action Command_ForceInput(int client, int args)
 					SetVariantString(sArguments[2]);
 
 				AcceptEntityInput(entity, sArguments[1], client, client);
-				ReplyToCommand(client, "[SM] Input succesfull.");
+				ReplyToCommand(client, "[SM] Input successful.");
 				LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\"  - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 			}
 		}
