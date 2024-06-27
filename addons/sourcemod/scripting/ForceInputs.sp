@@ -19,7 +19,7 @@ public Plugin myinfo =
 	name 			= "ForceInput",
 	author 			= "zaCade + BotoX + PSE Shufen + koen",
 	description 	= "Allows admins to force inputs on entities. (ent_fire)",
-	version 		= "2.1.2",
+	version 		= "2.1.3",
 	url 			= ""
 };
 
@@ -103,6 +103,12 @@ public Action Command_ForceInput(int client, int args)
 
 	if(StrEqual(sArguments[0], "!self"))
 	{
+		if (client == 0)
+		{
+			ReplyToCommand(client, "[SM] You can't use `!self` args from the server console.");
+			return Plugin_Handled;
+		}
+
 		if(sArguments[2][0])
 			SetVariantString(sArguments[2]);
 
@@ -112,6 +118,12 @@ public Action Command_ForceInput(int client, int args)
 	}
 	else if(StrEqual(sArguments[0], "!target"))
 	{
+		if (client == 0)
+		{
+			ReplyToCommand(client, "[SM] You can't use `!target` args from the server console.");
+			return Plugin_Handled;
+		}
+
 		float fPosition[3];
 		float fAngles[3];
 		GetClientEyePosition(client, fPosition);
