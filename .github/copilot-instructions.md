@@ -14,10 +14,10 @@ This repository contains the **ForceInputs** SourceMod plugin, which provides ad
 ## Technical Environment
 
 - **Language**: SourcePawn
-- **Platform**: SourceMod 1.11.0+ (targeting 1.12+ for future compatibility)
-- **Build System**: SourceKnight 0.2
-- **Compiler**: SourcePawn Compiler (spcomp) via SourceKnight
-- **CI/CD**: GitHub Actions with `maxime1907/action-sourceknight@v1`
+- **Platform**: SourceMod 1.12+
+- **Build System**: Native GitHub Actions (rumblefrog/setup-sp)
+- **Compiler**: SourcePawn Compiler (spcomp) via rumblefrog/setup-sp
+- **CI/CD**: GitHub Actions (`.github/workflows/ci.yml`)
 
 ## Project Structure
 
@@ -27,28 +27,26 @@ addons/sourcemod/scripting/
 
 .github/workflows/
 └── ci.yml                  # CI/CD pipeline
-
-sourceknight.yaml           # Build configuration
 ```
 
 ## Development Setup
 
 ### Prerequisites
-1. **SourceKnight**: Install via `pip install sourceknight`
-2. **SourceMod Dependencies**: Automatically downloaded by SourceKnight (v1.11.0-git6934)
+1. **SourcePawn Compiler (spcomp)**: Matching SourceMod 1.12.x, installed automatically in CI via `rumblefrog/setup-sp`
+2. **SourceMod Dependencies**: None beyond the base SourceMod install (`sourcemod`, `sdktools` includes)
 
 ### Local Development
 ```bash
-# Build the plugin
-sourceknight build
+# Build the plugin (from addons/sourcemod/scripting)
+spcomp -i include -o ../plugins/ForceInputs.smx ForceInputs.sp
 
 # Output will be in: addons/sourcemod/plugins/ForceInputs.smx
 ```
 
 ### Build Configuration
-The `sourceknight.yaml` defines:
+The `.github/workflows/ci.yml` defines:
 - Project name: ForceInputs
-- SourceMod dependency version: 1.11.0-git6934
+- SourceMod/SourcePawn compiler version: 1.12.x
 - Output directory: `/addons/sourcemod/plugins`
 - Build target: ForceInputs
 
@@ -127,8 +125,8 @@ CloseHandle(hTrace);
 
 ### Build Testing
 ```bash
-# Local build test
-sourceknight build
+# Local build test (from addons/sourcemod/scripting)
+spcomp -i include -o ../plugins/ForceInputs.smx ForceInputs.sp
 
 # Check for compilation errors
 # Output should be: addons/sourcemod/plugins/ForceInputs.smx
@@ -144,7 +142,7 @@ sourceknight build
 
 ### CI/CD Pipeline
 The GitHub Actions workflow:
-1. Builds the plugin using SourceKnight
+1. Builds the plugin using `rumblefrog/setup-sp` (spcomp)
 2. Creates release packages on version tags
 3. Uploads artifacts for download
 
@@ -161,7 +159,7 @@ The GitHub Actions workflow:
 ## Troubleshooting
 
 ### Common Issues
-1. **Build Failures**: Ensure SourceKnight is properly installed
+1. **Build Failures**: Ensure the SourcePawn compiler (spcomp) version matches SourceMod 1.12.x
 2. **Entity Not Found**: Verify entity exists and is valid
 3. **Permission Denied**: Check admin flags and command permissions
 4. **Console Restrictions**: Remember `!self` and `!target` don't work from console
@@ -207,7 +205,6 @@ The GitHub Actions workflow:
 
 - **Source Code**: `addons/sourcemod/scripting/ForceInputs.sp`
 - **Compiled Plugin**: `addons/sourcemod/plugins/ForceInputs.smx` (after build)
-- **Build Config**: `sourceknight.yaml`
 - **CI Configuration**: `.github/workflows/ci.yml`
 
 This plugin follows SourceMod best practices and provides a solid foundation for entity manipulation functionality in Source engine games.
