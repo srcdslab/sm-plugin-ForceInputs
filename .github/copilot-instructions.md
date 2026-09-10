@@ -148,7 +148,7 @@ The GitHub Actions workflow:
 
 ## Version Management
 
-- **Current Version**: 2.1.3 (in plugin info)
+- **Current Version**: 2.2.0 (in plugin info)
 - **Versioning**: Semantic versioning (MAJOR.MINOR.PATCH)
 - **Release Process**: 
   1. Update version in `myinfo` structure
