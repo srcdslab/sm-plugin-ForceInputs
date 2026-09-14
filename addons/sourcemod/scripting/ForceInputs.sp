@@ -138,7 +138,7 @@ public Action Command_ForceInput(int client, int args)
 	GetCmdArg(2, sArguments[1], sizeof(sArguments[]));
 	GetCmdArg(3, sArguments[2], sizeof(sArguments[]));
 
-	if(StrEqual(sArguments[0], "!self"))
+	if(strcmp(sArguments[0], "!self") == 0)
 	{
 		if(client == 0)
 		{
@@ -159,7 +159,7 @@ public Action Command_ForceInput(int client, int args)
 		return Plugin_Handled;
 	}
 
-	if(StrEqual(sArguments[0], "!target"))
+	if(strcmp(sArguments[0], "!target") == 0)
 	{
 		if(client == 0)
 		{
@@ -225,7 +225,7 @@ public Action Command_ForceInput(int client, int args)
 			GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
 			if((iWildcard > 0 && (strncmp(sClassname, sArguments[0], iWildcard, false) == 0 || strncmp(sTargetname, sArguments[0], iWildcard, false) == 0)) ||
-				(iWildcard <= 0 && (StrEqual(sClassname, sArguments[0], false) || StrEqual(sTargetname, sArguments[0], false))))
+				(iWildcard <= 0 && (strcmp(sClassname, sArguments[0], false) == 0 || strcmp(sTargetname, sArguments[0], false) == 0)))
 			{
 				hEntities.Push(EntIndexToEntRef(entity));
 			}
