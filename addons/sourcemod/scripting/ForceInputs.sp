@@ -35,23 +35,6 @@ public void OnPluginStart()
 }
 
 //----------------------------------------------------------------------------------------------------
-// Purpose: Captures classname/targetname before firing, since a successful input can destroy entity.
-//----------------------------------------------------------------------------------------------------
-void CaptureEntityInfo(int entity, char[] classname, int classnameLen, char[] targetname, int targetnameLen)
-{
-	GetEntPropString(entity, Prop_Data, "m_iClassname", classname, classnameLen);
-	GetEntPropString(entity, Prop_Data, "m_iName", targetname, targetnameLen);
-}
-
-//----------------------------------------------------------------------------------------------------
-// Purpose: Logs a forced input against an entity.
-//----------------------------------------------------------------------------------------------------
-void LogInput(int client, int entity, const char[] classname, const char[] targetname, const char[] input, const char[] parameter)
-{
-	LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, classname, targetname, input, parameter);
-}
-
-//----------------------------------------------------------------------------------------------------
 // Purpose:
 //----------------------------------------------------------------------------------------------------
 public Action Command_ForceInputPlayer(int client, int args)
@@ -187,7 +170,8 @@ public Action Command_ForceInput(int client, int args)
 
 		char sClassname[64];
 		char sTargetname[64];
-		CaptureEntityInfo(entity, sClassname, sizeof(sClassname), sTargetname, sizeof(sTargetname));
+		GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
+		GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
 		if(sArguments[2][0])
 			SetVariantString(sArguments[2]);
@@ -195,7 +179,7 @@ public Action Command_ForceInput(int client, int args)
 		if(AcceptEntityInput(entity, sArguments[1], client, client))
 		{
 			ReplyToCommand(client, "[SM] Input successful.");
-			LogInput(client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
+			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 		}
 		else
 		{
@@ -261,7 +245,8 @@ public Action Command_ForceInput(int client, int args)
 
 		char sClassname[64];
 		char sTargetname[64];
-		CaptureEntityInfo(entity, sClassname, sizeof(sClassname), sTargetname, sizeof(sTargetname));
+		GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
+		GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
 		if(sArguments[2][0])
 			SetVariantString(sArguments[2]);
@@ -269,7 +254,7 @@ public Action Command_ForceInput(int client, int args)
 		if(AcceptEntityInput(entity, sArguments[1], client, client))
 		{
 			iSuccess++;
-			LogInput(client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
+			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 		}
 		else
 		{
