@@ -206,6 +206,9 @@ public Action Command_ForceInput(int client, int args)
 		int entity = INVALID_ENT_REFERENCE;
 		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
 		{
+			if(entity < 1) // Never target worldspawn.
+				continue;
+
 			if(GetEntProp(entity, Prop_Data, "m_iHammerID") == iHammerID)
 				hEntities.Push(EntIndexToEntRef(entity));
 		}
@@ -217,6 +220,9 @@ public Action Command_ForceInput(int client, int args)
 		int entity = INVALID_ENT_REFERENCE;
 		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
 		{
+			if(entity < 1) // Never target worldspawn.
+				continue;
+
 			char sClassname[64];
 			char sTargetname[64];
 			GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
