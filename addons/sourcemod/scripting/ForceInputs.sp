@@ -191,6 +191,7 @@ public Action Command_ForceInput(int client, int args)
 
 	// Snapshot matches first: firing inputs while iterating FindEntityByClassname() is unsafe.
 	ArrayList hEntities = new ArrayList();
+	bool bWorldspawnMatched;
 
 	if(sArguments[0][0] == '#') // HammerID
 	{
@@ -206,11 +207,16 @@ public Action Command_ForceInput(int client, int args)
 		int entity = INVALID_ENT_REFERENCE;
 		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
 		{
-			if(entity < 1) // Never target worldspawn.
+			if(GetEntProp(entity, Prop_Data, "m_iHammerID") != iHammerID)
 				continue;
 
-			if(GetEntProp(entity, Prop_Data, "m_iHammerID") == iHammerID)
-				hEntities.Push(EntIndexToEntRef(entity));
+			if(entity < 1) // Never target worldspawn.
+			{
+				bWorldspawnMatched = true;
+				continue;
+			}
+
+			hEntities.Push(EntIndexToEntRef(entity));
 		}
 	}
 	else
@@ -220,9 +226,6 @@ public Action Command_ForceInput(int client, int args)
 		int entity = INVALID_ENT_REFERENCE;
 		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
 		{
-			if(entity < 1) // Never target worldspawn.
-				continue;
-
 			char sClassname[64];
 			char sTargetname[64];
 			GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
@@ -231,10 +234,19 @@ public Action Command_ForceInput(int client, int args)
 			if((iWildcard > 0 && (strncmp(sClassname, sArguments[0], iWildcard, false) == 0 || strncmp(sTargetname, sArguments[0], iWildcard, false) == 0)) ||
 				(iWildcard <= 0 && (strcmp(sClassname, sArguments[0], false) == 0 || strcmp(sTargetname, sArguments[0], false) == 0)))
 			{
+				if(entity < 1) // Never target worldspawn.
+				{
+					bWorldspawnMatched = true;
+					continue;
+				}
+
 				hEntities.Push(EntIndexToEntRef(entity));
 			}
 		}
 	}
+
+	if(bWorldspawnMatched)
+		ReplyToCommand(client, "[SM] worldspawn cannot be targeted, skipping.");
 
 	int iSuccess;
 	int iFailed;
