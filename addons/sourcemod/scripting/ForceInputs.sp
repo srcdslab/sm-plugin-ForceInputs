@@ -282,7 +282,7 @@ public Action Command_ForceInput(int client, int args)
 
 	delete hEntities;
 
-	if(!iSuccess && !iFailed)
+	if(!iSuccess && !iFailed && !bWorldspawnMatched)
 		ReplyToCommand(client, "[SM] No entities matched \"%s\".", sArguments[0]);
 	else if(iFailed)
 		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d of %d entities, %d failed.", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
