@@ -46,8 +46,7 @@ bool FireInput(int entity, const char[] input, const char[] parameter, int activ
 }
 
 //----------------------------------------------------------------------------------------------------
-// Purpose: Reads back the classname/targetname of an entity before an input is fired against it,
-// since a successful input (e.g. Kill) may destroy the entity, making it unsafe to read afterwards.
+// Purpose: Captures classname/targetname before firing, since a successful input can destroy entity.
 //----------------------------------------------------------------------------------------------------
 void CaptureEntityInfo(int entity, char[] classname, int classnameLen, char[] targetname, int targetnameLen)
 {
@@ -56,7 +55,7 @@ void CaptureEntityInfo(int entity, char[] classname, int classnameLen, char[] ta
 }
 
 //----------------------------------------------------------------------------------------------------
-// Purpose: Logs a forced input against an entity, using classname/targetname captured before firing.
+// Purpose: Logs a forced input against an entity.
 //----------------------------------------------------------------------------------------------------
 void LogInput(int client, int entity, const char[] classname, const char[] targetname, const char[] input, const char[] parameter)
 {
@@ -208,9 +207,7 @@ public Action Command_ForceInput(int client, int args)
 		return Plugin_Handled;
 	}
 
-	// Collect a snapshot of every matching entity first, then fire the input on it.
-	// Firing inputs while iterating FindEntityByClassname() is unsafe: an input can
-	// create or remove entities mid-iteration, which previously caused crashes.
+	// Snapshot matches first: firing inputs while iterating FindEntityByClassname() is unsafe.
 	ArrayList hEntities = new ArrayList();
 
 	if(sArguments[0][0] == '#') // HammerID
