@@ -30,7 +30,7 @@ public void OnPluginStart()
 {
 	LoadTranslations("common.phrases");
 
-	RegAdminCmd("sm_forceinput", Command_ForceInput, ADMFLAG_ROOT, "Force an input on entities by classname/targetname/HammerID (supports !self, !target, #<HammerID> and * wildcards)");
+	RegAdminCmd("sm_forceinput", Command_ForceInput, ADMFLAG_ROOT, "Force an input on entities by classname/targetname/HammerID (supports !self, !target, #<HammerID> and trailing * prefix matches)");
 	RegAdminCmd("sm_forceinputplayer", Command_ForceInputPlayer, ADMFLAG_ROOT, "Force an input on one or more players");
 }
 
@@ -39,8 +39,7 @@ public void OnPluginStart()
 //----------------------------------------------------------------------------------------------------
 bool FireInput(int entity, const char[] input, const char[] parameter, int activator, int caller)
 {
-	if(parameter[0])
-		SetVariantString(parameter);
+	SetVariantString(parameter);
 
 	return AcceptEntityInput(entity, input, activator, caller);
 }
@@ -99,7 +98,10 @@ public Action Command_ForceInputPlayer(int client, int args)
 	for(int i = 0; i < TargetCount; i++)
 	{
 		if(!IsClientInGame(aTargetList[i]))
+		{
+			iFailed++;
 			continue;
+		}
 
 		if(FireInput(aTargetList[i], sArguments[1], sArguments[2], aTargetList[i], aTargetList[i]))
 		{
@@ -203,6 +205,13 @@ public Action Command_ForceInput(int client, int args)
 
 	if(sArguments[0][0] == '#') // HammerID
 	{
+		if(!sArguments[0][1] || StringToInt(sArguments[0][1]) <= 0)
+		{
+			ReplyToCommand(client, "[SM] Invalid HammerID \"%s\".", sArguments[0][1]);
+			delete hEntities;
+			return Plugin_Handled;
+		}
+
 		int iHammerID = StringToInt(sArguments[0][1]);
 
 		int entity = INVALID_ENT_REFERENCE;
@@ -240,7 +249,10 @@ public Action Command_ForceInput(int client, int args)
 		int entity = EntRefToEntIndex(hEntities.Get(i));
 
 		if(entity == INVALID_ENT_REFERENCE || !IsValidEntity(entity))
+		{
+			iFailed++;
 			continue;
+		}
 
 		if(FireInput(entity, sArguments[1], sArguments[2], client, client))
 		{
