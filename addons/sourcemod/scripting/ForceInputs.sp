@@ -19,7 +19,7 @@ public Plugin myinfo =
 	name 			= "ForceInput",
 	author 			= "zaCade + BotoX + PSE Shufen + koen",
 	description 	= "Allows admins to force inputs on entities. (ent_fire)",
-	version 		= "2.2.0",
+	version 		= "2.2.1",
 	url 			= ""
 };
 
@@ -160,7 +160,7 @@ public Action Command_ForceInput(int client, int args)
 		Handle hTrace = TR_TraceRayFilterEx(fPosition, fAngles, MASK_SOLID, RayType_Infinite, TraceRayFilter, client);
 
 		int entity = TR_DidHit(hTrace) ? TR_GetEntityIndex(hTrace) : -1;
-		CloseHandle(hTrace);
+		delete hTrace;
 
 		if(entity < 1 || !IsValidEntity(entity))
 		{
