@@ -189,7 +189,8 @@ public Action Command_ForceInput(int client, int args)
 		return Plugin_Handled;
 	}
 
-	// Snapshot matches first: firing inputs while iterating FindEntityByClassname() is unsafe.
+	// Snapshot matches first: firing inputs while iterating entities is unsafe.
+	// Walk entity indexes directly: FindEntityByClassname("*") can yield no results.
 	ArrayList hEntities = new ArrayList();
 	bool bWorldspawnMatched;
 
@@ -204,9 +205,11 @@ public Action Command_ForceInput(int client, int args)
 
 		int iHammerID = StringToInt(sArguments[0][1]);
 
-		int entity = INVALID_ENT_REFERENCE;
-		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
+		for(int entity = 0; entity < GetMaxEntities(); entity++)
 		{
+			if(!IsValidEntity(entity))
+				continue;
+
 			if(GetEntProp(entity, Prop_Data, "m_iHammerID") != iHammerID)
 				continue;
 
@@ -223,9 +226,11 @@ public Action Command_ForceInput(int client, int args)
 	{
 		int iWildcard = FindCharInString(sArguments[0], '*');
 
-		int entity = INVALID_ENT_REFERENCE;
-		while((entity = FindEntityByClassname(entity, "*")) != INVALID_ENT_REFERENCE)
+		for(int entity = 0; entity < GetMaxEntities(); entity++)
 		{
+			if(!IsValidEntity(entity))
+				continue;
+
 			char sClassname[64];
 			char sTargetname[64];
 			GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
