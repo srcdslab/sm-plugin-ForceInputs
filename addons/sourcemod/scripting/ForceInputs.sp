@@ -19,7 +19,7 @@ public Plugin myinfo =
 	name 			= "ForceInput",
 	author 			= "zaCade + BotoX + PSE Shufen + koen",
 	description 	= "Allows admins to force inputs on entities. (ent_fire)",
-	version 		= "2.2.1",
+	version 		= "2.2.2",
 	url 			= ""
 };
 
@@ -194,6 +194,10 @@ public Action Command_ForceInput(int client, int args)
 	ArrayList hEntities = new ArrayList();
 	bool bWorldspawnMatched;
 
+	// Non-edict entities have indices above the 2048 limit
+	// So entity searches need to account for this
+	int iMaxEntities = GetMaxEntities() * 2;
+
 	if(sArguments[0][0] == '#') // HammerID
 	{
 		if(!sArguments[0][1] || StringToInt(sArguments[0][1]) <= 0)
@@ -205,7 +209,7 @@ public Action Command_ForceInput(int client, int args)
 
 		int iHammerID = StringToInt(sArguments[0][1]);
 
-		for(int entity = 0; entity < GetMaxEntities(); entity++)
+		for(int entity = 0; entity < iMaxEntities; entity++)
 		{
 			if(!IsValidEntity(entity))
 				continue;
@@ -226,7 +230,7 @@ public Action Command_ForceInput(int client, int args)
 	{
 		int iWildcard = FindCharInString(sArguments[0], '*');
 
-		for(int entity = 0; entity < GetMaxEntities(); entity++)
+		for(int entity = 0; entity < iMaxEntities; entity++)
 		{
 			if(!IsValidEntity(entity))
 				continue;
