@@ -39,7 +39,7 @@ public void OnPluginStart()
 //----------------------------------------------------------------------------------------------------
 public Action Command_ForceInputPlayer(int client, int args)
 {
-	if(args < 2)
+	if (args < 2)
 	{
 		ReplyToCommand(client, "[SM] Usage: sm_forceinputplayer <target> <input> [parameter]");
 		return Plugin_Handled;
@@ -55,7 +55,7 @@ public Action Command_ForceInputPlayer(int client, int args)
 	int TargetCount;
 	bool TnIsMl;
 
-	if((TargetCount = ProcessTargetString(
+	if ((TargetCount = ProcessTargetString(
 			sArguments[0],
 			client,
 			aTargetList,
@@ -72,18 +72,18 @@ public Action Command_ForceInputPlayer(int client, int args)
 	int iSuccess;
 	int iFailed;
 
-	for(int i = 0; i < TargetCount; i++)
+	for (int i = 0; i < TargetCount; i++)
 	{
-		if(!IsClientInGame(aTargetList[i]))
+		if (!IsClientInGame(aTargetList[i]))
 		{
 			iFailed++;
 			continue;
 		}
 
-		if(sArguments[2][0])
+		if (sArguments[2][0])
 			SetVariantString(sArguments[2]);
 
-		if(AcceptEntityInput(aTargetList[i], sArguments[1], aTargetList[i], aTargetList[i]))
+		if (AcceptEntityInput(aTargetList[i], sArguments[1], aTargetList[i], aTargetList[i]))
 		{
 			iSuccess++;
 			LogAction(client, aTargetList[i], "\"%L\" used ForceInputPlayer on \"%L\": \"%s %s\"", client, aTargetList[i], sArguments[1], sArguments[2]);
@@ -94,9 +94,9 @@ public Action Command_ForceInputPlayer(int client, int args)
 		}
 	}
 
-	if(!iSuccess && !iFailed)
+	if (!iSuccess && !iFailed)
 		ReplyToCommand(client, "[SM] Input \"%s\" was not applied to any player.", sArguments[1]);
-	else if(iFailed)
+	else if (iFailed)
 		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d of %d player(s), %d failed.", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
 	else
 		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d player(s).", sArguments[1], iSuccess);
@@ -109,7 +109,7 @@ public Action Command_ForceInputPlayer(int client, int args)
 //----------------------------------------------------------------------------------------------------
 public Action Command_ForceInput(int client, int args)
 {
-	if(args < 2)
+	if (args < 2)
 	{
 		ReplyToCommand(client, "[SM] Usage: sm_forceinput <classname/targetname> <input> [parameter]");
 		return Plugin_Handled;
@@ -120,18 +120,18 @@ public Action Command_ForceInput(int client, int args)
 	GetCmdArg(2, sArguments[1], sizeof(sArguments[]));
 	GetCmdArg(3, sArguments[2], sizeof(sArguments[]));
 
-	if(strcmp(sArguments[0], "!self") == 0)
+	if (strcmp(sArguments[0], "!self") == 0)
 	{
-		if(client == 0)
+		if (client == 0)
 		{
 			ReplyToCommand(client, "[SM] You can't use `!self` args from the server console.");
 			return Plugin_Handled;
 		}
 
-		if(sArguments[2][0])
+		if (sArguments[2][0])
 			SetVariantString(sArguments[2]);
 
-		if(AcceptEntityInput(client, sArguments[1], client, client))
+		if (AcceptEntityInput(client, sArguments[1], client, client))
 		{
 			ReplyToCommand(client, "[SM] Input successful.");
 			LogAction(client, client, "\"%L\" used ForceInput on himself: \"%s %s\"", client, sArguments[1], sArguments[2]);
@@ -144,9 +144,9 @@ public Action Command_ForceInput(int client, int args)
 		return Plugin_Handled;
 	}
 
-	if(strcmp(sArguments[0], "!target") == 0)
+	if (strcmp(sArguments[0], "!target") == 0)
 	{
-		if(client == 0)
+		if (client == 0)
 		{
 			ReplyToCommand(client, "[SM] You can't use `!target` args from the server console.");
 			return Plugin_Handled;
@@ -162,7 +162,7 @@ public Action Command_ForceInput(int client, int args)
 		int entity = TR_DidHit(hTrace) ? TR_GetEntityIndex(hTrace) : -1;
 		delete hTrace;
 
-		if(entity < 1 || !IsValidEntity(entity))
+		if (entity < 1 || !IsValidEntity(entity))
 		{
 			ReplyToCommand(client, "[SM] No valid entity found under your crosshair.");
 			return Plugin_Handled;
@@ -173,10 +173,10 @@ public Action Command_ForceInput(int client, int args)
 		GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
 		GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
-		if(sArguments[2][0])
+		if (sArguments[2][0])
 			SetVariantString(sArguments[2]);
 
-		if(AcceptEntityInput(entity, sArguments[1], client, client))
+		if (AcceptEntityInput(entity, sArguments[1], client, client))
 		{
 			ReplyToCommand(client, "[SM] Input successful.");
 			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
@@ -198,9 +198,9 @@ public Action Command_ForceInput(int client, int args)
 	// So entity searches need to account for this
 	int iMaxEntities = GetMaxEntities() * 2;
 
-	if(sArguments[0][0] == '#') // HammerID
+	if (sArguments[0][0] == '#') // HammerID
 	{
-		if(!sArguments[0][1] || StringToInt(sArguments[0][1]) <= 0)
+		if (!sArguments[0][1] || StringToInt(sArguments[0][1]) <= 0)
 		{
 			ReplyToCommand(client, "[SM] Invalid HammerID \"%s\".", sArguments[0][1]);
 			delete hEntities;
@@ -209,15 +209,15 @@ public Action Command_ForceInput(int client, int args)
 
 		int iHammerID = StringToInt(sArguments[0][1]);
 
-		for(int entity = 0; entity < iMaxEntities; entity++)
+		for (int entity = 0; entity < iMaxEntities; entity++)
 		{
-			if(!IsValidEntity(entity))
+			if (!IsValidEntity(entity))
 				continue;
 
-			if(GetEntProp(entity, Prop_Data, "m_iHammerID") != iHammerID)
+			if (GetEntProp(entity, Prop_Data, "m_iHammerID") != iHammerID)
 				continue;
 
-			if(entity < 1) // Never target worldspawn.
+			if (entity < 1) // Never target worldspawn.
 			{
 				bWorldspawnMatched = true;
 				continue;
@@ -230,9 +230,9 @@ public Action Command_ForceInput(int client, int args)
 	{
 		int iWildcard = FindCharInString(sArguments[0], '*');
 
-		for(int entity = 0; entity < iMaxEntities; entity++)
+		for (int entity = 0; entity < iMaxEntities; entity++)
 		{
-			if(!IsValidEntity(entity))
+			if (!IsValidEntity(entity))
 				continue;
 
 			char sClassname[64];
@@ -240,10 +240,10 @@ public Action Command_ForceInput(int client, int args)
 			GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
 			GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
-			if((iWildcard > 0 && (strncmp(sClassname, sArguments[0], iWildcard, false) == 0 || strncmp(sTargetname, sArguments[0], iWildcard, false) == 0)) ||
+			if ((iWildcard > 0 && (strncmp(sClassname, sArguments[0], iWildcard, false) == 0 || strncmp(sTargetname, sArguments[0], iWildcard, false) == 0)) ||
 				(iWildcard <= 0 && (strcmp(sClassname, sArguments[0], false) == 0 || strcmp(sTargetname, sArguments[0], false) == 0)))
 			{
-				if(entity < 1) // Never target worldspawn.
+				if (entity < 1) // Never target worldspawn.
 				{
 					bWorldspawnMatched = true;
 					continue;
@@ -254,17 +254,17 @@ public Action Command_ForceInput(int client, int args)
 		}
 	}
 
-	if(bWorldspawnMatched)
+	if (bWorldspawnMatched)
 		ReplyToCommand(client, "[SM] worldspawn cannot be targeted, skipping.");
 
 	int iSuccess;
 	int iFailed;
 
-	for(int i = 0; i < hEntities.Length; i++)
+	for (int i = 0; i < hEntities.Length; i++)
 	{
 		int entity = EntRefToEntIndex(hEntities.Get(i));
 
-		if(entity == INVALID_ENT_REFERENCE || !IsValidEntity(entity))
+		if (entity == INVALID_ENT_REFERENCE || !IsValidEntity(entity))
 		{
 			iFailed++;
 			continue;
@@ -275,10 +275,10 @@ public Action Command_ForceInput(int client, int args)
 		GetEntPropString(entity, Prop_Data, "m_iClassname", sClassname, sizeof(sClassname));
 		GetEntPropString(entity, Prop_Data, "m_iName", sTargetname, sizeof(sTargetname));
 
-		if(sArguments[2][0])
+		if (sArguments[2][0])
 			SetVariantString(sArguments[2]);
 
-		if(AcceptEntityInput(entity, sArguments[1], client, client))
+		if (AcceptEntityInput(entity, sArguments[1], client, client))
 		{
 			iSuccess++;
 			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
@@ -291,9 +291,9 @@ public Action Command_ForceInput(int client, int args)
 
 	delete hEntities;
 
-	if(!iSuccess && !iFailed && !bWorldspawnMatched)
+	if (!iSuccess && !iFailed && !bWorldspawnMatched)
 		ReplyToCommand(client, "[SM] No entities matched \"%s\".", sArguments[0]);
-	else if(iFailed)
+	else if (iFailed)
 		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d of %d entities, %d failed.", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
 	else
 		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d entities.", sArguments[1], iSuccess);
@@ -306,7 +306,7 @@ public Action Command_ForceInput(int client, int args)
 //----------------------------------------------------------------------------------------------------
 public bool TraceRayFilter(int entity, int mask, any client)
 {
-	if(entity == client)
+	if (entity == client)
 		return false;
 
 	return true;
