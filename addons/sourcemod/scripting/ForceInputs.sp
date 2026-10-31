@@ -19,7 +19,7 @@ public Plugin myinfo =
 	name 			= "ForceInput",
 	author 			= "zaCade, BotoX, PŠΣ™ Shufen, koen",
 	description 	= "Allows admins to fire inputs on entities",
-	version 		= "2.2.2",
+	version 		= "2.2.3",
 	url 			= "https://github.com/srcdslab/sm-plugin-ForceInputs"
 };
 
@@ -29,6 +29,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	LoadTranslations("common.phrases");
+	LoadTranslations("ForceInputs.phrases");
 
 	RegAdminCmd("sm_forceinput", Command_ForceInput, ADMFLAG_ROOT, "Force an input on entities by classname/targetname/HammerID (supports !self, !target, #<HammerID> and trailing * prefix matches)");
 	RegAdminCmd("sm_forceinputplayer", Command_ForceInputPlayer, ADMFLAG_ROOT, "Force an input on one or more players");
@@ -41,7 +42,7 @@ public Action Command_ForceInputPlayer(int client, int args)
 {
 	if (args < 2)
 	{
-		ReplyToCommand(client, "[SM] Usage: sm_forceinputplayer <target> <input> [parameter]");
+		ReplyToCommand(client, "[SM] %t", "ForceInputPlayer Usage");
 		return Plugin_Handled;
 	}
 
@@ -93,11 +94,11 @@ public Action Command_ForceInputPlayer(int client, int args)
 	}
 
 	if (!iSuccess && !iFailed)
-		ReplyToCommand(client, "[SM] Input \"%s\" was not applied to any player.", sArguments[1]);
+		ReplyToCommand(client, "[SM] %t", "ForceInputPlayer None Applied", sArguments[1]);
 	else if (iFailed)
-		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d of %d player(s), %d failed.", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
+		ReplyToCommand(client, "[SM] %t", "ForceInputPlayer Partial", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
 	else
-		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d player(s).", sArguments[1], iSuccess);
+		ReplyToCommand(client, "[SM] %t", "ForceInputPlayer Applied", sArguments[1], iSuccess);
 
 	return Plugin_Handled;
 }
@@ -109,7 +110,7 @@ public Action Command_ForceInput(int client, int args)
 {
 	if (args < 2)
 	{
-		ReplyToCommand(client, "[SM] Usage: sm_forceinput <classname/targetname> <input> [parameter]");
+		ReplyToCommand(client, "[SM] %t", "ForceInput Usage");
 		return Plugin_Handled;
 	}
 
@@ -122,7 +123,7 @@ public Action Command_ForceInput(int client, int args)
 	{
 		if (client == 0)
 		{
-			ReplyToCommand(client, "[SM] You can't use `!self` args from the server console.");
+			ReplyToCommand(client, "[SM] %t", "ForceInput Arg Not From Console", "!self");
 			return Plugin_Handled;
 		}
 
@@ -131,11 +132,11 @@ public Action Command_ForceInput(int client, int args)
 
 		if (AcceptEntityInput(client, sArguments[1], client, client))
 		{
-			ReplyToCommand(client, "[SM] Input successful.");
+			ReplyToCommand(client, "[SM] %t", "ForceInput Successful");
 			LogAction(client, client, "\"%L\" used ForceInput on himself: \"%s %s\"", client, sArguments[1], sArguments[2]);
 		}
 		else
-			ReplyToCommand(client, "[SM] Input \"%s\" failed.", sArguments[1]);
+			ReplyToCommand(client, "[SM] %t", "ForceInput Failed", sArguments[1]);
 
 		return Plugin_Handled;
 	}
@@ -144,7 +145,7 @@ public Action Command_ForceInput(int client, int args)
 	{
 		if (client == 0)
 		{
-			ReplyToCommand(client, "[SM] You can't use `!target` args from the server console.");
+			ReplyToCommand(client, "[SM] %t", "ForceInput Arg Not From Console", "!target");
 			return Plugin_Handled;
 		}
 
@@ -160,7 +161,7 @@ public Action Command_ForceInput(int client, int args)
 
 		if (entity < 1 || !IsValidEntity(entity))
 		{
-			ReplyToCommand(client, "[SM] No valid entity found under your crosshair.");
+			ReplyToCommand(client, "[SM] %t", "ForceInput No Aimed Entity");
 			return Plugin_Handled;
 		}
 
@@ -174,11 +175,11 @@ public Action Command_ForceInput(int client, int args)
 
 		if (AcceptEntityInput(entity, sArguments[1], client, client))
 		{
-			ReplyToCommand(client, "[SM] Input successful.");
+			ReplyToCommand(client, "[SM] %t", "ForceInput Successful");
 			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 		}
 		else
-			ReplyToCommand(client, "[SM] Input \"%s\" failed.", sArguments[1]);
+			ReplyToCommand(client, "[SM] %t", "ForceInput Failed", sArguments[1]);
 
 		return Plugin_Handled;
 	}
@@ -191,7 +192,7 @@ public Action Command_ForceInput(int client, int args)
 	{
 		if (!sArguments[0][1] || StringToInt(sArguments[0][1]) <= 0)
 		{
-			ReplyToCommand(client, "[SM] Invalid HammerID \"%s\".", sArguments[0][1]);
+			ReplyToCommand(client, "[SM] %t", "ForceInput Invalid HammerID", sArguments[0][1]);
 			delete hEntities;
 			return Plugin_Handled;
 		}
@@ -250,7 +251,7 @@ public Action Command_ForceInput(int client, int args)
 	}
 
 	if (bWorldspawnMatched)
-		ReplyToCommand(client, "[SM] worldspawn cannot be targeted, skipping.");
+		ReplyToCommand(client, "[SM] %t", "ForceInput Worldspawn Skipped");
 
 	int iSuccess;
 	int iFailed;
@@ -285,11 +286,11 @@ public Action Command_ForceInput(int client, int args)
 	delete hEntities;
 
 	if (!iSuccess && !iFailed && !bWorldspawnMatched)
-		ReplyToCommand(client, "[SM] No entities matched \"%s\".", sArguments[0]);
+		ReplyToCommand(client, "[SM] %t", "ForceInput No Match", sArguments[0]);
 	else if (iFailed)
-		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d of %d entities, %d failed.", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
+		ReplyToCommand(client, "[SM] %t", "ForceInput Partial", sArguments[1], iSuccess, iSuccess + iFailed, iFailed);
 	else
-		ReplyToCommand(client, "[SM] Input \"%s\" applied to %d entities.", sArguments[1], iSuccess);
+		ReplyToCommand(client, "[SM] %t", "ForceInput Applied", sArguments[1], iSuccess);
 
 	return Plugin_Handled;
 }
