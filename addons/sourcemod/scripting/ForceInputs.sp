@@ -17,10 +17,10 @@
 public Plugin myinfo =
 {
 	name 			= "ForceInput",
-	author 			= "zaCade + BotoX + PSE Shufen + koen",
-	description 	= "Allows admins to force inputs on entities. (ent_fire)",
+	author 			= "zaCade, BotoX, PŠΣ™ Shufen, koen",
+	description 	= "Allows admins to fire inputs on entities",
 	version 		= "2.2.2",
-	url 			= ""
+	url 			= "https://github.com/srcdslab/sm-plugin-ForceInputs"
 };
 
 //----------------------------------------------------------------------------------------------------
@@ -89,9 +89,7 @@ public Action Command_ForceInputPlayer(int client, int args)
 			LogAction(client, aTargetList[i], "\"%L\" used ForceInputPlayer on \"%L\": \"%s %s\"", client, aTargetList[i], sArguments[1], sArguments[2]);
 		}
 		else
-		{
 			iFailed++;
-		}
 	}
 
 	if (!iSuccess && !iFailed)
@@ -137,9 +135,7 @@ public Action Command_ForceInput(int client, int args)
 			LogAction(client, client, "\"%L\" used ForceInput on himself: \"%s %s\"", client, sArguments[1], sArguments[2]);
 		}
 		else
-		{
 			ReplyToCommand(client, "[SM] Input \"%s\" failed.", sArguments[1]);
-		}
 
 		return Plugin_Handled;
 	}
@@ -182,21 +178,14 @@ public Action Command_ForceInput(int client, int args)
 			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 		}
 		else
-		{
 			ReplyToCommand(client, "[SM] Input \"%s\" failed.", sArguments[1]);
-		}
 
 		return Plugin_Handled;
 	}
 
 	// Snapshot matches first: firing inputs while iterating entities is unsafe.
-	// Walk entity indexes directly: FindEntityByClassname("*") can yield no results.
 	ArrayList hEntities = new ArrayList();
 	bool bWorldspawnMatched;
-
-	// Non-edict entities have indices above the 2048 limit
-	// So entity searches need to account for this
-	int iMaxEntities = GetMaxEntities() * 2;
 
 	if (sArguments[0][0] == '#') // HammerID
 	{
@@ -209,15 +198,18 @@ public Action Command_ForceInput(int client, int args)
 
 		int iHammerID = StringToInt(sArguments[0][1]);
 
-		for (int entity = 0; entity < iMaxEntities; entity++)
+		int iRef = INVALID_ENT_REFERENCE;
+		while ((iRef = FindEntityByClassname(iRef, "*")) != INVALID_ENT_REFERENCE)
 		{
-			if (!IsValidEntity(entity))
+			int entity = EntRefToEntIndex(iRef);
+
+			if (entity == INVALID_ENT_REFERENCE)
 				continue;
 
 			if (GetEntProp(entity, Prop_Data, "m_iHammerID") != iHammerID)
 				continue;
 
-			if (entity < 1) // Never target worldspawn.
+			if (entity == 0) // Never target worldspawn.
 			{
 				bWorldspawnMatched = true;
 				continue;
@@ -230,9 +222,12 @@ public Action Command_ForceInput(int client, int args)
 	{
 		int iWildcard = FindCharInString(sArguments[0], '*');
 
-		for (int entity = 0; entity < iMaxEntities; entity++)
+		int iRef = INVALID_ENT_REFERENCE;
+		while ((iRef = FindEntityByClassname(iRef, "*")) != INVALID_ENT_REFERENCE)
 		{
-			if (!IsValidEntity(entity))
+			int entity = EntRefToEntIndex(iRef);
+
+			if (entity == INVALID_ENT_REFERENCE)
 				continue;
 
 			char sClassname[64];
@@ -243,7 +238,7 @@ public Action Command_ForceInput(int client, int args)
 			if ((iWildcard > 0 && (strncmp(sClassname, sArguments[0], iWildcard, false) == 0 || strncmp(sTargetname, sArguments[0], iWildcard, false) == 0)) ||
 				(iWildcard <= 0 && (strcmp(sClassname, sArguments[0], false) == 0 || strcmp(sTargetname, sArguments[0], false) == 0)))
 			{
-				if (entity < 1) // Never target worldspawn.
+				if (entity == 0) // Never target worldspawn.
 				{
 					bWorldspawnMatched = true;
 					continue;
@@ -284,9 +279,7 @@ public Action Command_ForceInput(int client, int args)
 			LogAction(client, -1, "\"%L\" used ForceInput on Entity \"%d\" - \"%s\" - \"%s\": \"%s %s\"", client, entity, sClassname, sTargetname, sArguments[1], sArguments[2]);
 		}
 		else
-		{
 			iFailed++;
-		}
 	}
 
 	delete hEntities;
