@@ -1,0 +1,152 @@
+"Phrases"
+{
+	"ForceInputPlayer Usage"
+	{
+		"en"		"Usage: sm_forceinputplayer <target> <input> [parameter]"
+		"fr"		"Utilisation : sm_forceinputplayer <target> <input> [parameter]"
+		"ru"		"Использование: sm_forceinputplayer <target> <input> [parameter]"
+		"es"		"Uso: sm_forceinputplayer <target> <input> [parameter]"
+		"de"		"Verwendung: sm_forceinputplayer <target> <input> [parameter]"
+		"pt"		"Uso: sm_forceinputplayer <target> <input> [parameter]"
+		"chi"		"用法：sm_forceinputplayer <target> <input> [parameter]"
+	}
+	"ForceInputPlayer None Applied"
+	{
+		"#format"	"{1:s}"
+		"en"		"Input \"{1}\" was not applied to any player."
+		"fr"		"L'input \"{1}\" n'a été appliqué à aucun joueur."
+		"ru"		"Ввод \"{1}\" не был применён ни к одному игроку."
+		"es"		"El input \"{1}\" no se aplicó a ningún jugador."
+		"de"		"Input \"{1}\" wurde auf keinen Spieler angewendet."
+		"pt"		"O input \"{1}\" não foi aplicado a nenhum jogador."
+		"chi"		"输入 \"{1}\" 未应用到任何玩家。"
+	}
+	"ForceInputPlayer Partial"
+	{
+		"#format"	"{1:s},{2:d},{3:d},{4:d}"
+		"en"		"Input \"{1}\" applied to {2} of {3} player(s), {4} failed."
+		"fr"		"Input \"{1}\" appliqué à {2} joueur(s) sur {3}, {4} échec(s)."
+		"ru"		"Ввод \"{1}\" применён к {2} из {3} игроков, ошибок: {4}."
+		"es"		"Input \"{1}\" aplicado a {2} de {3} jugador(es), {4} fallido(s)."
+		"de"		"Input \"{1}\" auf {2} von {3} Spieler(n) angewendet, {4} fehlgeschlagen."
+		"pt"		"Input \"{1}\" aplicado a {2} de {3} jogador(es), {4} falharam."
+		"chi"		"输入 \"{1}\" 已应用到 {3} 名玩家中的 {2} 名，{4} 名失败。"
+	}
+	"ForceInputPlayer Applied"
+	{
+		"#format"	"{1:s},{2:d}"
+		"en"		"Input \"{1}\" applied to {2} player(s)."
+		"fr"		"Input \"{1}\" appliqué à {2} joueur(s)."
+		"ru"		"Ввод \"{1}\" применён к игрокам: {2}."
+		"es"		"Input \"{1}\" aplicado a {2} jugador(es)."
+		"de"		"Input \"{1}\" auf {2} Spieler angewendet."
+		"pt"		"Input \"{1}\" aplicado a {2} jogador(es)."
+		"chi"		"输入 \"{1}\" 已应用到 {2} 名玩家。"
+	}
+	"ForceInput Usage"
+	{
+		"en"		"Usage: sm_forceinput <classname/targetname> <input> [parameter]"
+		"fr"		"Utilisation : sm_forceinput <classname/targetname> <input> [parameter]"
+		"ru"		"Использование: sm_forceinput <classname/targetname> <input> [parameter]"
+		"es"		"Uso: sm_forceinput <classname/targetname> <input> [parameter]"
+		"de"		"Verwendung: sm_forceinput <classname/targetname> <input> [parameter]"
+		"pt"		"Uso: sm_forceinput <classname/targetname> <input> [parameter]"
+		"chi"		"用法：sm_forceinput <classname/targetname> <input> [parameter]"
+	}
+	"ForceInput Arg Not From Console"
+	{
+		"#format"	"{1:s}"
+		"en"		"You can't use `{1}` args from the server console."
+		"fr"		"Vous ne pouvez pas utiliser l'argument `{1}` depuis la console du serveur."
+		"ru"		"Нельзя использовать аргумент `{1}` из консоли сервера."
+		"es"		"No puedes usar el argumento `{1}` desde la consola del servidor."
+		"de"		"Das Argument `{1}` kann nicht in der Serverkonsole verwendet werden."
+		"pt"		"Você não pode usar o argumento `{1}` pelo console do servidor."
+		"chi"		"不能在服务器控制台中使用 `{1}` 参数。"
+	}
+	"ForceInput Successful"
+	{
+		"en"		"Input successful."
+		"fr"		"Input réussi."
+		"ru"		"Ввод выполнен успешно."
+		"es"		"Input ejecutado con éxito."
+		"de"		"Input erfolgreich."
+		"pt"		"Input executado com sucesso."
+		"chi"		"输入成功。"
+	}
+	"ForceInput Failed"
+	{
+		"#format"	"{1:s}"
+		"en"		"Input \"{1}\" failed."
+		"fr"		"L'input \"{1}\" a échoué."
+		"ru"		"Ввод \"{1}\" не выполнен."
+		"es"		"El input \"{1}\" falló."
+		"de"		"Input \"{1}\" fehlgeschlagen."
+		"pt"		"O input \"{1}\" falhou."
+		"chi"		"输入 \"{1}\" 失败。"
+	}
+	"ForceInput No Aimed Entity"
+	{
+		"en"		"No valid entity found under your crosshair."
+		"fr"		"Aucune entité valide trouvée sous votre viseur."
+		"ru"		"Под прицелом не найдено подходящей сущности."
+		"es"		"No se encontró ninguna entidad válida bajo tu mira."
+		"de"		"Keine gültige Entity unter deinem Fadenkreuz gefunden."
+		"pt"		"Nenhuma entidade válida encontrada na sua mira."
+		"chi"		"准星下没有找到有效的实体。"
+	}
+	"ForceInput Invalid HammerID"
+	{
+		"#format"	"{1:s}"
+		"en"		"Invalid HammerID \"{1}\"."
+		"fr"		"HammerID \"{1}\" invalide."
+		"ru"		"Неверный HammerID \"{1}\"."
+		"es"		"HammerID \"{1}\" no válido."
+		"de"		"Ungültige HammerID \"{1}\"."
+		"pt"		"HammerID \"{1}\" inválido."
+		"chi"		"无效的 HammerID \"{1}\"。"
+	}
+	"ForceInput Worldspawn Skipped"
+	{
+		"en"		"worldspawn cannot be targeted, skipping."
+		"fr"		"worldspawn ne peut pas être ciblé, ignoré."
+		"ru"		"worldspawn нельзя выбрать целью, пропущено."
+		"es"		"worldspawn no puede ser objetivo, se omite."
+		"de"		"worldspawn kann nicht anvisiert werden, wird übersprungen."
+		"pt"		"worldspawn não pode ser alvo, ignorando."
+		"chi"		"无法将 worldspawn 作为目标，已跳过。"
+	}
+	"ForceInput No Match"
+	{
+		"#format"	"{1:s}"
+		"en"		"No entities matched \"{1}\"."
+		"fr"		"Aucune entité ne correspond à \"{1}\"."
+		"ru"		"Нет сущностей, соответствующих \"{1}\"."
+		"es"		"Ninguna entidad coincide con \"{1}\"."
+		"de"		"Keine Entities passen zu \"{1}\"."
+		"pt"		"Nenhuma entidade corresponde a \"{1}\"."
+		"chi"		"没有与 \"{1}\" 匹配的实体。"
+	}
+	"ForceInput Partial"
+	{
+		"#format"	"{1:s},{2:d},{3:d},{4:d}"
+		"en"		"Input \"{1}\" applied to {2} of {3} entities, {4} failed."
+		"fr"		"Input \"{1}\" appliqué à {2} entité(s) sur {3}, {4} échec(s)."
+		"ru"		"Ввод \"{1}\" применён к {2} из {3} сущностей, ошибок: {4}."
+		"es"		"Input \"{1}\" aplicado a {2} de {3} entidades, {4} fallida(s)."
+		"de"		"Input \"{1}\" auf {2} von {3} Entities angewendet, {4} fehlgeschlagen."
+		"pt"		"Input \"{1}\" aplicado a {2} de {3} entidades, {4} falharam."
+		"chi"		"输入 \"{1}\" 已应用到 {3} 个实体中的 {2} 个，{4} 个失败。"
+	}
+	"ForceInput Applied"
+	{
+		"#format"	"{1:s},{2:d}"
+		"en"		"Input \"{1}\" applied to {2} entities."
+		"fr"		"Input \"{1}\" appliqué à {2} entité(s)."
+		"ru"		"Ввод \"{1}\" применён к сущностям: {2}."
+		"es"		"Input \"{1}\" aplicado a {2} entidades."
+		"de"		"Input \"{1}\" auf {2} Entities angewendet."
+		"pt"		"Input \"{1}\" aplicado a {2} entidades."
+		"chi"		"输入 \"{1}\" 已应用到 {2} 个实体。"
+	}
+}
