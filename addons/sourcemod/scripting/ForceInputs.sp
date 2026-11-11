@@ -19,7 +19,7 @@ public Plugin myinfo =
 	name 			= "ForceInput",
 	author 			= "zaCade, BotoX, PŠΣ™ Shufen, koen",
 	description 	= "Allows admins to fire inputs on entities",
-	version 		= "2.2.3",
+	version 		= "2.2.4",
 	url 			= "https://github.com/srcdslab/sm-plugin-ForceInputs"
 };
 
