@@ -9,6 +9,12 @@
 		"de"		"Verwendung: sm_forceinputplayer <target> <input> [parameter]"
 		"pt"		"Uso: sm_forceinputplayer <target> <input> [parameter]"
 		"chi"		"用法：sm_forceinputplayer <target> <input> [parameter]"
+		"pl"		"Użycie: sm_forceinputplayer <target> <input> [parameter]"
+		"tr"		"Kullanım: sm_forceinputplayer <target> <input> [parameter]"
+		"it"		"Uso: sm_forceinputplayer <target> <input> [parameter]"
+		"ua"		"Використання: sm_forceinputplayer <target> <input> [parameter]"
+		"zho"		"用法:sm_forceinputplayer <target> <input> [parameter]"
+		"cze"		"Použití: sm_forceinputplayer <target> <input> [parameter]"
 	}
 	"ForceInputPlayer None Applied"
 	{
@@ -20,6 +26,12 @@
 		"de"		"Input \"{1}\" wurde auf keinen Spieler angewendet."
 		"pt"		"O input \"{1}\" não foi aplicado a nenhum jogador."
 		"chi"		"输入 \"{1}\" 未应用到任何玩家。"
+		"pl"		"Input \"{1}\" nie został zastosowany do żadnego gracza."
+		"tr"		"\"{1}\" girdisi hiçbir oyuncuya uygulanmadı."
+		"it"		"L'input \"{1}\" non è stato applicato a nessun giocatore."
+		"ua"		"Інпут \"{1}\" не було застосовано до жодного гравця."
+		"zho"		"輸入 \"{1}\" 未套用到任何玩家。"
+		"cze"		"Input \"{1}\" nebyl aplikován na žádného hráče."
 	}
 	"ForceInputPlayer Partial"
 	{
@@ -31,6 +43,12 @@
 		"de"		"Input \"{1}\" auf {2} von {3} Spieler(n) angewendet, {4} fehlgeschlagen."
 		"pt"		"Input \"{1}\" aplicado a {2} de {3} jogador(es), {4} falharam."
 		"chi"		"输入 \"{1}\" 已应用到 {3} 名玩家中的 {2} 名，{4} 名失败。"
+		"pl"		"Input \"{1}\" zastosowano do {2} z {3} graczy, niepowodzeń: {4}."
+		"tr"		"\"{1}\" girdisi {3} oyuncudan {2} tanesine uygulandı, {4} başarısız."
+		"it"		"Input \"{1}\" applicato a {2} giocatori su {3}, {4} falliti."
+		"ua"		"Інпут \"{1}\" застосовано до {2} з {3} гравців, невдало: {4}."
+		"zho"		"輸入 \"{1}\" 已套用到 {3} 名玩家中的 {2} 名,{4} 名失敗。"
+		"cze"		"Input \"{1}\" aplikován na {2} z {3} hráčů, selhalo: {4}."
 	}
 	"ForceInputPlayer Applied"
 	{
@@ -42,6 +60,12 @@
 		"de"		"Input \"{1}\" auf {2} Spieler angewendet."
 		"pt"		"Input \"{1}\" aplicado a {2} jogador(es)."
 		"chi"		"输入 \"{1}\" 已应用到 {2} 名玩家。"
+		"pl"		"Input \"{1}\" zastosowano do graczy: {2}."
+		"tr"		"\"{1}\" girdisi {2} oyuncuya uygulandı."
+		"it"		"Input \"{1}\" applicato a {2} giocatori."
+		"ua"		"Інпут \"{1}\" застосовано до гравців: {2}."
+		"zho"		"輸入 \"{1}\" 已套用到 {2} 名玩家。"
+		"cze"		"Input \"{1}\" aplikován na hráče: {2}."
 	}
 	"ForceInput Usage"
 	{
@@ -52,6 +76,12 @@
 		"de"		"Verwendung: sm_forceinput <classname/targetname> <input> [parameter]"
 		"pt"		"Uso: sm_forceinput <classname/targetname> <input> [parameter]"
 		"chi"		"用法：sm_forceinput <classname/targetname> <input> [parameter]"
+		"pl"		"Użycie: sm_forceinput <classname/targetname> <input> [parameter]"
+		"tr"		"Kullanım: sm_forceinput <classname/targetname> <input> [parameter]"
+		"it"		"Uso: sm_forceinput <classname/targetname> <input> [parameter]"
+		"ua"		"Використання: sm_forceinput <classname/targetname> <input> [parameter]"
+		"zho"		"用法:sm_forceinput <classname/targetname> <input> [parameter]"
+		"cze"		"Použití: sm_forceinput <classname/targetname> <input> [parameter]"
 	}
 	"ForceInput Arg Not From Console"
 	{
@@ -63,6 +93,12 @@
 		"de"		"Das Argument `{1}` kann nicht in der Serverkonsole verwendet werden."
 		"pt"		"Você não pode usar o argumento `{1}` pelo console do servidor."
 		"chi"		"不能在服务器控制台中使用 `{1}` 参数。"
+		"pl"		"Nie możesz używać argumentów `{1}` z konsoli serwera."
+		"tr"		"`{1}` argümanlarını sunucu konsolundan kullanamazsın."
+		"it"		"Non puoi usare gli argomenti `{1}` dalla console del server."
+		"ua"		"Ви не можете використовувати аргументи `{1}` з консолі сервера."
+		"zho"		"無法從伺服器控制台使用 `{1}` 參數。"
+		"cze"		"Argumenty `{1}` nelze použít z konzole serveru."
 	}
 	"ForceInput Successful"
 	{
@@ -73,6 +109,12 @@
 		"de"		"Input erfolgreich."
 		"pt"		"Input executado com sucesso."
 		"chi"		"输入成功。"
+		"pl"		"Input zakończony sukcesem."
+		"tr"		"Girdi başarılı."
+		"it"		"Input riuscito."
+		"ua"		"Інпут успішний."
+		"zho"		"輸入成功。"
+		"cze"		"Input byl úspěšný."
 	}
 	"ForceInput Failed"
 	{
@@ -84,6 +126,12 @@
 		"de"		"Input \"{1}\" fehlgeschlagen."
 		"pt"		"O input \"{1}\" falhou."
 		"chi"		"输入 \"{1}\" 失败。"
+		"pl"		"Input \"{1}\" nie powiódł się."
+		"tr"		"\"{1}\" girdisi başarısız oldu."
+		"it"		"Input \"{1}\" fallito."
+		"ua"		"Інпут \"{1}\" не вдався."
+		"zho"		"輸入 \"{1}\" 失敗。"
+		"cze"		"Input \"{1}\" selhal."
 	}
 	"ForceInput No Aimed Entity"
 	{
@@ -94,6 +142,12 @@
 		"de"		"Keine gültige Entity unter deinem Fadenkreuz gefunden."
 		"pt"		"Nenhuma entidade válida encontrada na sua mira."
 		"chi"		"准星下没有找到有效的实体。"
+		"pl"		"Nie znaleziono prawidłowej jednostki pod celownikiem."
+		"tr"		"Nişangahının altında geçerli bir varlık bulunamadı."
+		"it"		"Nessuna entità valida trovata sotto il mirino."
+		"ua"		"Під прицілом не знайдено дійсної сутності."
+		"zho"		"準星下找不到有效的實體。"
+		"cze"		"Pod zaměřovačem nebyla nalezena žádná platná entita."
 	}
 	"ForceInput Invalid HammerID"
 	{
@@ -105,6 +159,12 @@
 		"de"		"Ungültige HammerID \"{1}\"."
 		"pt"		"HammerID \"{1}\" inválido."
 		"chi"		"无效的 HammerID \"{1}\"。"
+		"pl"		"Nieprawidłowy HammerID \"{1}\"."
+		"tr"		"Geçersiz HammerID \"{1}\"."
+		"it"		"HammerID \"{1}\" non valido."
+		"ua"		"Недійсний HammerID \"{1}\"."
+		"zho"		"無效的 HammerID \"{1}\"。"
+		"cze"		"Neplatné HammerID \"{1}\"."
 	}
 	"ForceInput Worldspawn Skipped"
 	{
@@ -115,6 +175,12 @@
 		"de"		"worldspawn kann nicht anvisiert werden, wird übersprungen."
 		"pt"		"worldspawn não pode ser alvo, ignorando."
 		"chi"		"无法将 worldspawn 作为目标，已跳过。"
+		"pl"		"worldspawn nie może być celem, pomijam."
+		"tr"		"worldspawn hedef alınamaz, atlanıyor."
+		"it"		"worldspawn non può essere bersagliato, saltato."
+		"ua"		"worldspawn не може бути ціллю, пропускаю."
+		"zho"		"無法以 worldspawn 為目標,已略過。"
+		"cze"		"worldspawn nelze cílit, přeskakuji."
 	}
 	"ForceInput No Match"
 	{
@@ -126,6 +192,12 @@
 		"de"		"Keine Entities passen zu \"{1}\"."
 		"pt"		"Nenhuma entidade corresponde a \"{1}\"."
 		"chi"		"没有与 \"{1}\" 匹配的实体。"
+		"pl"		"Żadna jednostka nie pasuje do \"{1}\"."
+		"tr"		"\"{1}\" ile eşleşen varlık yok."
+		"it"		"Nessuna entità corrisponde a \"{1}\"."
+		"ua"		"Жодна сутність не відповідає \"{1}\"."
+		"zho"		"沒有符合 \"{1}\" 的實體。"
+		"cze"		"Žádné entity neodpovídají \"{1}\"."
 	}
 	"ForceInput Partial"
 	{
@@ -137,6 +209,12 @@
 		"de"		"Input \"{1}\" auf {2} von {3} Entities angewendet, {4} fehlgeschlagen."
 		"pt"		"Input \"{1}\" aplicado a {2} de {3} entidades, {4} falharam."
 		"chi"		"输入 \"{1}\" 已应用到 {3} 个实体中的 {2} 个，{4} 个失败。"
+		"pl"		"Input \"{1}\" zastosowano do {2} z {3} jednostek, niepowodzeń: {4}."
+		"tr"		"\"{1}\" girdisi {3} varlıktan {2} tanesine uygulandı, {4} başarısız."
+		"it"		"Input \"{1}\" applicato a {2} entità su {3}, {4} falliti."
+		"ua"		"Інпут \"{1}\" застосовано до {2} з {3} сутностей, невдало: {4}."
+		"zho"		"輸入 \"{1}\" 已套用到 {3} 個實體中的 {2} 個,{4} 個失敗。"
+		"cze"		"Input \"{1}\" aplikován na {2} z {3} entit, selhalo: {4}."
 	}
 	"ForceInput Applied"
 	{
@@ -148,5 +226,11 @@
 		"de"		"Input \"{1}\" auf {2} Entities angewendet."
 		"pt"		"Input \"{1}\" aplicado a {2} entidades."
 		"chi"		"输入 \"{1}\" 已应用到 {2} 个实体。"
+		"pl"		"Input \"{1}\" zastosowano do jednostek: {2}."
+		"tr"		"\"{1}\" girdisi {2} varlığa uygulandı."
+		"it"		"Input \"{1}\" applicato a {2} entità."
+		"ua"		"Інпут \"{1}\" застосовано до сутностей: {2}."
+		"zho"		"輸入 \"{1}\" 已套用到 {2} 個實體。"
+		"cze"		"Input \"{1}\" aplikován na entity: {2}."
 	}
 }
